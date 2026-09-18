@@ -1,0 +1,18 @@
+[workspace]
+channels = ["conda-forge"]
+name = "cellpose-gui-4.2.1.1-training"
+platforms = [{ platform = "linux-64", cuda = "12" }]
+version = "0.1.0"
+
+[environments]
+cellpose-gui-training = ["cellpose-gui-training"]
+
+[feature.cellpose-gui-training.dependencies]
+python = "3.13.*"
+jupyterlab = "==4.6.1"
+matplotlib = ">=3.11.2,<4"
+ipykernel = ">=7.3.0,<8"
+pip = ">=26.2.1,<27"
+
+[feature.cellpose-gui-training.pypi-dependencies]
+cellpose = { version = "==4.2.1.1", extras = ["gui"] }
