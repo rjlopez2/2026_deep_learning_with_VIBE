@@ -18,7 +18,7 @@ From: rockylinux/rockylinux:9-minimal
     dnf install -y epel-release
     dnf config-manager --set-enabled crb
 
-    dnf install -y bash wget
+    dnf install -y bash wget git
     
     VGL_LATEST=$(curl -ILs -o /dev/null -w %{url_effective} https://github.com/VirtualGL/virtualgl/releases/latest | cut -d '/' -f8)
     wget -P /opt https://github.com/VirtualGL/virtualgl/releases/download/$VGL_LATEST/VirtualGL-$VGL_LATEST.x86_64.rpm
