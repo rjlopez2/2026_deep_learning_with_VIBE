@@ -48,3 +48,6 @@ Temporary Items
 
 # add temp folder
 temp/
+
+# Jupyter Notebook Checkpoints
+**/.ipynb_checkpoints
