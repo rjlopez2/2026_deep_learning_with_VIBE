@@ -45,3 +45,6 @@ Temporary Items
 
 # Apptainer Images
 **/*.sif
+
+# add temp folder
+temp/
