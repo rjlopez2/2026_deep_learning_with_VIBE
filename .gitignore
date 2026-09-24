@@ -47,7 +47,8 @@ Temporary Items
 **/*.sif
 
 # add temp folder
-temp/
+**/temp
+**/build_logs
 
 # Jupyter Notebook Checkpoints
 **/.ipynb_checkpoints
