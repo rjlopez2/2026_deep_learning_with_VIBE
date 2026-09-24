@@ -51,3 +51,6 @@ temp/
 
 # Jupyter Notebook Checkpoints
 **/.ipynb_checkpoints
+
+# add data folder
+data/
