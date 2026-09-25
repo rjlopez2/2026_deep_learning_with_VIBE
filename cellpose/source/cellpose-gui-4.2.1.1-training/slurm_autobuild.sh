@@ -24,7 +24,7 @@
 
 # CONTAINER_DIR=$(pwd)
 CONTAINER_DIR=$(readlink -f $HOME/Desktop/dsl_vibe_rs/trainings/2026_deep_learning_with_VIBE/cellpose/source/cellpose-gui-4.2.1.1-training)
-CONTAINER_NAME="cellpose-gui-4.2.1.1-training.sif"
+CONTAINER_NAME="cellpose-gui-4.2.1.1-training"
 LOG_FILE_NAME=$(date +"%Y-%m-%d_%H-%M-%S")
 LOG_FILE_DIRECTORY="${CONTAINER_DIR}/build_logs"
 LOG_FILE="${LOG_FILE_DIRECTORY}/build_${CONTAINER_NAME}_${LOG_FILE_NAME}.log"
