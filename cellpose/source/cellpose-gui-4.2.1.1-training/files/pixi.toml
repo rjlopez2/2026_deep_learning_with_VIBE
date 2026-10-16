@@ -14,6 +14,7 @@ matplotlib = ">=3.11.2,<4"
 ipykernel = ">=7.3.0,<8"
 pandas = ">=3.0.6,<4"
 zenodo_get = ">=3.1.0,<4"
+jupyter_contrib_nbextensions = ">=0.7.0,<0.8"
 
 [feature.cellpose-gui-training.pypi-dependencies]
 cellpose = { version = "==4.2.1.1", extras = ["gui"] }
