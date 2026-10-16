@@ -55,3 +55,7 @@ Temporary Items
 
 # add data folder
 data/
+
+# add .tif and .npy files
+**/*.tif
+**/*.npy
