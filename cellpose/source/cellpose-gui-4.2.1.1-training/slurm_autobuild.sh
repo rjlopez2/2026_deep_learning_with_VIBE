@@ -3,11 +3,8 @@
 ############### Run this script from the main folder of your application ###############
 ################ Builds the container and saves it in VIBE container storage ###########
 ################ By default is stored in the local application folder ###########
-############### Logs are stored in <application_folder>/temp/logs ##################
+############### Logs are stored in <application_folder>/build_logs ##################
 
-# Usage:
-#   sbatch ../../temp/build_containers_new.sh [--cold-run] [--cache] [--save-[local|test|dev]]
-#   or directly: ../../temp/build_containers_new.sh [--cold-run] [--cache] [--save-[local|test|dev]]
 
 #SBATCH --account=gratis
 #SBATCH --partition=epyc2
