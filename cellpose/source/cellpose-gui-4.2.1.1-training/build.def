@@ -30,7 +30,7 @@ From: rockylinux/rockylinux:9-minimal
     # Optional dnf
     # -------------------------
     # Suppress warning tha hostname command missing from VirtualGL
-    dnf -y install hostname
+    dnf -y install hostname tree
     
 
     # install pixi in /opt
