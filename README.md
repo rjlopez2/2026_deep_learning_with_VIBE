@@ -29,9 +29,15 @@ We will try to use cellpose to segment microscopy images from live cells. We wil
 Finally, we will asses the performance quality of our model using standard benchmark and metrics.
 
 
-## Manually fine-tuning your model with human in the loop
+## 1. Data preparation
 
-1. Organize the dataset for easy GUI handeling. Run the jupyter notebook `01_data_preparation.ipynb`. This will pull the data from zenodo, extract it and create a couple of others folders by splitting the data. If the scripts run correctly you will be able to see the following folder structure under the `../data/` folder:
+Download and organize the dataset for easy GUI  and programatically handeling. Launch Jupyter lab by executing in your command line the following script:
+
+```bash
+./start_jupyterlab.sh
+```
+
+Open the `01_data_preparation.ipynb` file and execute the full script. This will pull the data from zenodo, extract it and splitting the data and reorganize the files. If the scripts run correctly you will be able to see  a zip file an 3 folders `A172`,`A172_splits_n100_seed42` and `A172_manual_training` with the following folder structure under the `../data/` folder:
 
 ```bash
 ├── A172
@@ -51,20 +57,35 @@ Finally, we will asses the performance quality of our model using standard bench
 │       ├── A172_Phase_A7_1_01d00h00m_1.tif
 │       └...
 ├── A172.zip
-└── manual_train
+└── A172_manual_training
+    ├── A172_Phase_A7_1_00d04h00m_3.tif
+    ├── A172_Phase_A7_1_01d00h00m_2.tif
+    ├── A172_Phase_A7_1_01d00h00m_4.tif
+    └...
 ```
-Note that in each of the splits there exist pairs of image + mask with the sufix name `'*_seg.npy'`
 
-2. create a new folder call it `'manual_train'` under the directory `../data/` and copy the content from the `../data/A172_splits_n100_seed42/validation/` folder.
-2. Launch the GUI by executing the following command from the `'../scripts'`:
+The folder `A172`contains the orginal data from the .zip file. There are over It contains over ~600 images from train and test sets. For the seek of this excercise, we will use only 100 images from this dataset and split it into `train` `test` and `validation` sets, each with its image + annotation (masks with the sufix name `'*_seg.npy'`) respectively. That is the content of the `A172_splits_n100_seed42` folder. finally, the folder `A172_manual_training` is a copy of images only (no mask) from the `train` split.
+
+## 2. Manually fine-tuning your model with human in the loop
+
+1. Launch the GUI by executing the following command from the `'../scripts'`:
+
 ```bash
 ./start_cellpose.sh
 ```
-2. Open any sample image from the validation folder located at: `../data/A172_splits_n100_seed42/validation/`
-3. Delete or correct the mask: Using Delete multiple ROIs pannel try to delete mask and create new one
-3. Select a model of your preference from the list and use it to infer the segmentation. Push run.
-4. Visually inspect the segmentation made by teh model: Was it good? all cells were nicely segmented? are there any false positive?
-5. 
+
+2. Open any sample image from the validation folder located at: `../data/A172_manual_training/`
+
+3. On the Segmentation pannel, select a model or use the default and click Run to segment the cells of your image.
+
+4. Drawing pannel, togggel the MASK ON to visualy asses the segmentation quality. Add, delete or edit ROIs that were missed or wrongly predicted. Save the mask with `Ctrl + s` when you are happy. Use the help assistance to find additional information about how to use the cellpose GUI. 
+
+5. Repeat this process with few images: load image -> predict with your model -> modify the mask if need it -> save your mask
+
+6. Train your own model with your new annotations: from the top menu select: `Models -> Train new model with image + mask in folder`. You can adjuts here your train settings. Note that at the right site will be displayed teh mask that you have created. For the model parameters you can reduce the n_epochs, give a memmorable name to your model and let the other values as they are. click OK to start your triaining. Monitor the training process on the command line.
+
+7. Use your model to predict/segment your images: load one of your images and under the Segmentation pannel use the "user-trained models" to select your newly trained model. Hit run to use it for segemtnign your images. Do you see any improvement?
+
 
 
 ## Fine-tuning your model programatically
