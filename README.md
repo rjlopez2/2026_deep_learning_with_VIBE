@@ -37,12 +37,21 @@ Download and organize the dataset for easy GUI  and programatically handeling. L
 ./start_jupyterlab.sh
 ```
 
-Open the `01_data_preparation.ipynb` file and execute the full script. This will pull the data from zenodo, extract it and splitting the data and reorganize the files. If the scripts run correctly you will be able to see  a zip file an 3 folders `A172`,`A172_splits_n100_seed42` and `A172_manual_training` with the following folder structure under the `../data/` folder:
+Open the `01_data_preparation.ipynb` file and execute the full script. This will pull the data from zenodo, extract it and splitting the data and reorganize the files. If the scripts run correctly you will be able to see  a zip file an 3 folders:
+- `A172`
+- `A172_splits_n100_seed42`
+- `A172_manual_training` 
+
+as swonw bellow on the `../data/` folder:
 
 ```bash
 ├── A172
 │   ├── test
+│   │   ├── input
+│   │   └── output
 │   └── train
+│       ├── input
+│       └── output
 ├── A172_splits_n100_seed42
 │   ├── test
 │   │   ├── A172_Phase_A7_2_02d20h00m_3_seg.npy
@@ -64,7 +73,7 @@ Open the `01_data_preparation.ipynb` file and execute the full script. This will
     └...
 ```
 
-The folder `A172`contains the orginal data from the .zip file. There are over It contains over ~600 images from train and test sets. For the seek of this excercise, we will use only 100 images from this dataset and split it into `train` `test` and `validation` sets, each with its image + annotation (masks with the sufix name `'*_seg.npy'`) respectively. That is the content of the `A172_splits_n100_seed42` folder. finally, the folder `A172_manual_training` is a copy of images only (no mask) from the `train` split.
+The folder `A172`contains the orginal data from the .zip file. There are over  ~600 images from train and test sets. For the seek of this excercise, we will use only 100 images from this dataset and split it into `train` `test` and `validation` sets, each with its image + annotation (masks with the sufix name `'*_seg.npy'`) respectively. That is the content of the `A172_splits_n100_seed42` folder. Finally, the folder `A172_manual_training` is a copy of images only (no mask) from the `train` split.
 
 ## 2. Manually fine-tuning your model with human in the loop
 
@@ -84,7 +93,7 @@ The folder `A172`contains the orginal data from the .zip file. There are over It
 
 6. Train your own model with your new annotations: from the top menu select: `Models -> Train new model with image + mask in folder`. You can adjuts here your train settings. Note that at the right site will be displayed teh mask that you have created. For the model parameters you can reduce the n_epochs, give a memmorable name to your model and let the other values as they are. click OK to start your triaining. Monitor the training process on the command line.
 
-7. Use your model to predict/segment your images: load one of your images and under the Segmentation pannel use the "user-trained models" to select your newly trained model. Hit run to use it for segemtnign your images. Do you see any improvement?
+7. Use your model to predict/segment your images: load one of your images and under the Segmentation pannel use the "user-trained models" to select your newly trained model. Hit run to use it for segmenting your images. Do you see any improvement?
 
 
 
