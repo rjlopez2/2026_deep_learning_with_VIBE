@@ -103,4 +103,11 @@ file `01_data_preparation.ipynb` and execute the full script. This will pull the
 
 
 
-## Fine-tuning your model programmatically
+### (Optional) Fine-tuning your model programmatically
+
+- Open the notebook `02_train_model.ipynb` under the `scripts` folder.
+- Follow the instructions from the notebook and execute the cells for training a new model.
+
+## Asses the quality of the model from benchmark metrics
+
+- Open the notebook `03_asses_model.ipynb` under the `scripts` folder.
