@@ -1,15 +1,5 @@
 # Material for the workshop "Deep learning tools using VIBE"
 
-# Data
-
-Source data for training the model and excercise are findable in zenodeo [here](https://zenodo.org/records/10277106)
-
-# Experimental
-
-Things being ignored by gitignore are kept in the temp folder, for instance, experimental work.
-
-# Stepts to run this exercice:
-
 # Aim
 
 The aim of this exercise is to become familiar with Cellpose, a generalist algorithm for cellular segmentation from microscopy images. 
@@ -31,11 +21,20 @@ Finally, we will asses the performance quality of our model using standard bench
 
 ## 1. Data preparation
 
-Download and organize the dataset for easy GUI  and programatically handeling. Launch Jupyter lab by executing in your command line the following script:
+To prepare your setup to run this project please follow these steps:
 
-```bash
-./start_jupyterlab.sh
-```
+- Create a new folder on your home directory for this project.
+- Copy the `2026_deep_learning_with_VIBE.zip` file located on the location: `/storage/research/dsl_vibe_rs/trainings/2026_deep_learning_with_VIBE` and unzip the file. Hint: right click and try to decompress it with PeaZip.
+- From now on you will work in your own copy of this project. 
+
+Source data for training the model and excercise are findable in zenodeo [here](https://zenodo.org/records/10277106).
+
+### (Optional) do the data preparation via scripts
+We can wownload and organize the dataset programatically for easy handeling with the GUI.
+
+steps: 
+- Launch jupyterlab: `Applications -> VIBE -> VIBE Applications -> jupyterlab -> jupyterlab (cellpose-gui-4.2.1.1)[VIBE]`
+- navigate to the folder you saved the the project
 
 Open the `01_data_preparation.ipynb` file and execute the full script. This will pull the data from zenodo, extract it and splitting the data and reorganize the files. If the scripts run correctly you will be able to see  a zip file an 3 folders:
 - `A172`
