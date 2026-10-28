@@ -56,9 +56,10 @@ Temporary Items
 # add data folder
 data/
 
-# add .tif and .npy files
+# add .zip, .tif and .npy files
 **/*.tif
 **/*.npy
+**/*.zip
 
 # add any folder called "models"
 **/models
