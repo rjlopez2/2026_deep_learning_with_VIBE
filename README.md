@@ -7,14 +7,14 @@ You will:
 
 1. Explore the Cellpose GUI and its main features such as create, modify and remove annotations.
 2. Segment images using the default models.
-3. Visually evaluate the quality of the resulting segmentations.
+3. Visually evaluate the quality of the resulting segmentation.
 4. Retrain a model using a toy dataset.
 5. Systematically assess segmentation quality using standard metrics available through the Cellpose API.
 
 
 # The tasks
 
-We will try to use cellpose to segment microscopy images from live cells. We will first inspect the quality of the segmentation using specialized deep learning models and compare the segmentation with the correct annotation (ground truth). First we will try to iteratively fine tune a generalist model with our dataset using the GUI. Then we will try to do a more advanced excercice and train aour model with more control programatically.
+We will try to use cellpose to segment microscopy images from live cells. We will first inspect the quality of the segmentation using specialized deep learning models and compare the segmentation with the correct annotation (ground truth). First we will try to iteratively fine tune a generalist model with our dataset using the GUI. Then we will try to do a more advanced exercise and train our model with more control programmatically.
 
 Finally, we will asses the performance quality of our model using standard benchmark and metrics.
 
@@ -26,22 +26,11 @@ To prepare your setup to run this project please follow these steps:
 - Create a new folder on your home directory for this project.
 - Copy the `2026_deep_learning_with_VIBE.zip` file located on the location: `/storage/research/dsl_vibe_rs/trainings/2026_deep_learning_with_VIBE` and unzip the file. Hint: right click and try to decompress it with PeaZip.
 - From now on you will work in your own copy of this project. 
-
-Source data for training the model and excercise are findable in zenodeo [here](https://zenodo.org/records/10277106).
-
-### (Optional) do the data preparation via scripts
-We can wownload and organize the dataset programatically for easy handeling with the GUI.
-
-steps: 
-- Launch jupyterlab: `Applications -> VIBE -> VIBE Applications -> jupyterlab -> jupyterlab (cellpose-gui-4.2.1.1)[VIBE]`
-- navigate to the folder you saved the the project
-
-Open the `01_data_preparation.ipynb` file and execute the full script. This will pull the data from zenodo, extract it and splitting the data and reorganize the files. If the scripts run correctly you will be able to see  a zip file an 3 folders:
-- `A172`
-- `A172_splits_n100_seed42`
-- `A172_manual_training` 
-
-as swonw bellow on the `../data/` folder:
+- Explore the `../data/` folder, it contains 3 folders 
+    - `A172`
+    - `A172_splits_n100_seed42`
+    - `A172_manual_training` 
+and a zip file with the raw data as shown here:
 
 ```bash
 ├── A172
@@ -72,7 +61,25 @@ as swonw bellow on the `../data/` folder:
     └...
 ```
 
-The folder `A172`contains the orginal data from the .zip file. There are over  ~600 images from train and test sets. For the seek of this excercise, we will use only 100 images from this dataset and split it into `train` `test` and `validation` sets, each with its image + annotation (masks with the sufix name `'*_seg.npy'`) respectively. That is the content of the `A172_splits_n100_seed42` folder. Finally, the folder `A172_manual_training` is a copy of images only (no mask) from the `train` split.
+The folder `A172`contains the original data from the .zip file. There are over ~600 images from train and test sets altogether. For the seek of this exercise, we will use only 100 images from this dataset and split it into `train` `test` and `validation` sets, each with its image + annotation (masks with the suffix name `'*_seg.npy'`) respectively. That is the content of the `A172_splits_n100_seed42` folder. Finally, the folder `A172_manual_training` is a copy of images only (no mask) from the `train` split.
+
+Source data for training the model and exercise are findable in Zenodo [here](https://zenodo.org/records/10277106).
+
+### (Optional) Data preparation via scripts
+We can download and organize the dataset programmatically for easy handling with the GUI.
+
+Steps: 
+- Create a new folder on your home directory for this project.
+- Clone the project repository into teh folder you created using:
+```bash
+git clone https://github.com/dsl-unibe-ch/2026_deep_learning_with_VIBE.git
+```
+- Launch jupyterlab: `Applications -> VIBE -> VIBE Applications -> jupyterlab -> jupyterlab (cellpose-gui-4.2.1.1)[VIBE]`
+- navigate to the folder you saved the the project and open the 
+file `01_data_preparation.ipynb` and execute the full script. This will pull the data from zenodo, extract it and splitting the data and reorganize the files. If the scripts run correctly you will be able to see  a zip file an 3 folders each with its content as explained above.
+
+
+
 
 ## 2. Manually fine-tuning your model with human in the loop
 
@@ -84,16 +91,16 @@ The folder `A172`contains the orginal data from the .zip file. There are over  ~
 
 2. Open any sample image from the validation folder located at: `../data/A172_manual_training/`
 
-3. On the Segmentation pannel, select a model or use the default and click Run to segment the cells of your image.
+3. On the Segmentation panel, select a model or use the default and click Run to segment the cells of your image.
 
-4. Drawing pannel, togggel the MASK ON to visualy asses the segmentation quality. Add, delete or edit ROIs that were missed or wrongly predicted. Save the mask with `Ctrl + s` when you are happy. Use the help assistance to find additional information about how to use the cellpose GUI. 
+4. Drawing panel, toggle the MASK ON to visually asses the segmentation quality. Add, delete or edit ROIs that were missed or wrongly predicted. Save the mask with `Ctrl + s` when you are happy. Use the help assistance to find additional information about how to use the cellpose GUI. 
 
 5. Repeat this process with few images: load image -> predict with your model -> modify the mask if need it -> save your mask
 
-6. Train your own model with your new annotations: from the top menu select: `Models -> Train new model with image + mask in folder`. You can adjuts here your train settings. Note that at the right site will be displayed teh mask that you have created. For the model parameters you can reduce the n_epochs, give a memmorable name to your model and let the other values as they are. click OK to start your triaining. Monitor the training process on the command line.
+6. Train your own model with your new annotations: from the top menu select: `Models -> Train new model with image + mask in folder`. You can adjust here your train settings. Note that at the right site will be displayed teh mask that you have created. For the model parameters you can reduce the n_epochs, give a memorable name to your model and let the other values as they are. click OK to start your training. Monitor the training process on the command line.
 
-7. Use your model to predict/segment your images: load one of your images and under the Segmentation pannel use the "user-trained models" to select your newly trained model. Hit run to use it for segmenting your images. Do you see any improvement?
+7. Use your model to predict/segment your images: load one of your images and under the Segmentation panel use the "user-trained models" to select your newly trained model. Hit run to use it for segmenting your images. Do you see any improvement?
 
 
 
-## Fine-tuning your model programatically
+## Fine-tuning your model programmatically
