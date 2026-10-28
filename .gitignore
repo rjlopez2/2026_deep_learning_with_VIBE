@@ -62,3 +62,6 @@ data/
 
 # add any folder called "models"
 **/models
+
+# add any folder called "source"
+**/source
