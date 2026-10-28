@@ -59,6 +59,7 @@ data/
 # add .zip, .tif and .npy files
 **/*.tif
 **/*.npy
+**/*.png
 **/*.zip
 
 # add any folder called "models"
