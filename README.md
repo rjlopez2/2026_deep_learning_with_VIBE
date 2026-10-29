@@ -83,24 +83,20 @@ file `01_data_preparation.ipynb` and execute the full script. This will pull the
 
 ## 2. Manually fine-tuning your model with human in the loop
 
-1. Launch the GUI by executing the following command from the `'../scripts'`:
+1. Launch the cellpose application by navigating to: `Applications -> VIBE -> VIBE Applications -> cellpose -> cellpose (cellpose-gui-4.2.1.1) [VIBE]`
 
-```bash
-./start_cellpose.sh
-```
 
-2. Open any sample image from the validation folder located at: `../data/A172_manual_training/`
+2. Open any sample image from the folder `../data/A172_manual_training/` that was decompressed in the previous step. Drag and drop option is possible.
 
-3. On the Segmentation panel, select a model or use the default and click Run to segment the cells of your image.
+3. On the Segmentation panel, select any of the default model but the `cpsam_v2`. Use for instance the `cpdino` model. Hit "run" to segment the cells of your image.
 
-4. Drawing panel, toggle the MASK ON to visually asses the segmentation quality. Add, delete or edit ROIs that were missed or wrongly predicted. Save the mask with `Ctrl + s` when you are happy. Use the help assistance to find additional information about how to use the cellpose GUI. 
+4. On the Drawing panel, toggle the MASK ON to visually asses the segmentation quality. Add, delete or edit ROIs that were missed or wrongly predicted. Save the mask with `Ctrl + s` when you are happy. Use the help assistance or go to the [official documentation](https://cellpose.readthedocs.io/en/latest/gui.html) to find additional information about how to use the cellpose GUI. 
 
-5. Repeat this process with few images: load image -> predict with your model -> modify the mask if need it -> save your mask
+5. Repeat this process with few images (at least 5): load image -> predict with your model -> modify the mask if need it -> save your mask
 
 6. Train your own model with your new annotations: from the top menu select: `Models -> Train new model with image + mask in folder`. You can adjust here your train settings. Note that at the right site will be displayed teh mask that you have created. For the model parameters you can reduce the n_epochs, give a memorable name to your model and let the other values as they are. click OK to start your training. Monitor the training process on the command line.
 
 7. Use your model to predict/segment your images: load one of your images and under the Segmentation panel use the "user-trained models" to select your newly trained model. Hit run to use it for segmenting your images. Do you see any improvement?
-
 
 
 ### (Optional) Fine-tuning your model programmatically
