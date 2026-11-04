@@ -99,11 +99,12 @@ file `01_data_preparation.ipynb` and execute the full script. This will pull the
 7. Use your model to predict/segment your images: load one of your images and under the Segmentation panel use the "user-trained models" to select your newly trained model. Hit run to use it for segmenting your images. Do you see any improvement?
 
 
-### (Optional) Fine-tuning your model programmatically
+## 3. Fine-tuning your model programmatically (Optional)
 
 - Open the notebook `02_train_model.ipynb` under the `scripts` folder.
 - Follow the instructions from the notebook and execute the cells for training a new model.
 
-## Asses the quality of the model from benchmark metrics
+## 4. Asses the quality of the model from benchmark metrics
 
 - Open the notebook `03_asses_model.ipynb` under the `scripts` folder.
+- Follow the instructions from the notebook and execute the cells to obtain and evaluate the metrics of your model.
