@@ -48,6 +48,7 @@ Source data for training the model and exercise are findable in Zenodo [here](ht
 We can download and organize the dataset programmatically for easy handling with the GUI.
 
 !!! note 
+
 To run the section to pull the data from zenodo, you will to install the package `zenodo_get` in your environment or manually the folder from Zenodo (see link above). 
 
 Steps: 
@@ -56,12 +57,9 @@ Steps:
 jupyter notebook `01_data_preparation.ipynb` and follow the instructions to execute the full script. This will check it the data directories exist, if not, it will be pulled from zenodo, extract it and splitting the data and reorganize the files. If the scripts run correctly you will be able to see the folders with the same content as explained above.
 
 
-
-
 ## 2. Manually fine-tuning your model with human in the loop
 
 1. Launch the cellpose application by navigating to: `Applications -> VIBE -> VIBE Applications -> cellpose -> cellpose (cellpose-gui-4.2.1.1) [VIBE]`
-
 
 2. Open any sample image from the folder `../data/A172_manual_training/` that was decompressed in the previous step. Drag and drop option is possible.
 
@@ -85,3 +83,33 @@ jupyter notebook `01_data_preparation.ipynb` and follow the instructions to exec
 
 - Open the notebook `03_asses_model.ipynb` under the `scripts` folder.
 - Follow the instructions from the notebook and execute the cells to obtain and evaluate the metrics of your model.
+
+## 5. Model interoperability with other Applications (QuPath)
+
+In this small exercise we will try to use our recently fine-tunned model to segment our cell inside a different application: QuPath.
+
+- Next to the script folder create a folder called `qupath_project`.
+
+- Launch the `QuPath-extensions` application from the `VIBE-applications` menu.
+
+- create a project and point to the folder you have just created before.
+
+- drag and drop any image that you want to test the segmentation. Use for instance images from the folder `manual_training_n50_seed42`
+
+- create a region of interest ROI on the image. **Important step**: if not done, the model will not run on the image and complains with message: "Please select a parent object!"
+
+- when prompted for what type of image this is, select "others"
+
+- Go to `Extension -> Cellpose -> Cellpose detection script template`
+
+- Change line 23 of the template script where the model path is defined and replace it where your model is located, for example with something like that:
+
+```groovy
+def pathModel = "~/Desktop/test_course_vive/2026_deep_learning_with_VIBE/cellpose/models/A172_splits_n500_seed42_cyto-finetuned_n_epochs11_b_size64_w_decay0.1_l_rate1e-05"
+```
+- change the line 25 of the script where the channels are defined to the value: `0`
+
+- hit the "Run" button to start the segmentation.
+
+- Inspect the results of the segmentation.
+
