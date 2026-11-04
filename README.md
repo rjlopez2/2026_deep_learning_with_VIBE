@@ -26,42 +26,22 @@ To prepare your setup to run this project please follow these steps:
 - Create a new folder on your home directory for this project.
 - Copy the `2026_deep_learning_with_VIBE.zip` file located on the location: `/storage/research/dsl_vibe_rs/trainings/2026_deep_learning_with_VIBE` and unzip the file. Hint: right click and try to decompress it with PeaZip.
 - From now on you will work in your own copy of this project. 
-- Explore the `../data/` folder, it contains 3 folders 
+- Explore the `../data_cp/` folder, it contains the following 5 folders 
     - `A172`
+    - `A172_splits_n50_seed42`
     - `A172_splits_n100_seed42`
-    - `A172_manual_training` 
-and a zip file with the raw data as shown here:
+    - `A172_splits_n200_seed42`
+    - `A172_splits_n500_seed42`
+The folder `A172` is the original dataset which we will not use. There are over ~600 images from train and test sets altogether. The other folders contain subsets of the original dataset of varying sizes: n= 50, 100, 200, 500 as indicated on their names. Inside any of this subsets you will find the following folder structure:
 
 ```bash
-├── A172
-│   ├── test
-│   │   ├── input
-│   │   └── output
-│   └── train
-│       ├── input
-│       └── output
-├── A172_splits_n100_seed42
-│   ├── test
-│   │   ├── A172_Phase_A7_2_02d20h00m_3_seg.npy
-│   │   ├── A172_Phase_A7_2_02d20h00m_3.tif
-│   │   └...
-│   ├── train
-│   │   ├── A172_Phase_A7_1_00d04h00m_3_seg.npy
-│   │   ├── A172_Phase_A7_1_00d04h00m_3.tif
-│   │   └...
-│   └── validation
-│       ├── A172_Phase_A7_1_01d00h00m_1_seg.npy
-│       ├── A172_Phase_A7_1_01d00h00m_1.tif
-│       └...
-├── A172.zip
-└── A172_manual_training
-    ├── A172_Phase_A7_1_00d04h00m_3.tif
-    ├── A172_Phase_A7_1_01d00h00m_2.tif
-    ├── A172_Phase_A7_1_01d00h00m_4.tif
-    └...
+└── A172_splits_n50_seed42
+    ├── manual_training_n50_seed42
+    ├── test
+    ├── train
+    └── validation
 ```
-
-The folder `A172`contains the original data from the .zip file. There are over ~600 images from train and test sets altogether. For the seek of this exercise, we will use only 100 images from this dataset and split it into `train` `test` and `validation` sets, each with its image + annotation (masks with the suffix name `'*_seg.npy'`) respectively. That is the content of the `A172_splits_n100_seed42` folder. Finally, the folder `A172_manual_training` is a copy of images only (no mask) from the `train` split.
+Inside the folder you will find the data split as 80% for the train 10% for test + 10% for validation for the respective size. Each of them contain a pair of images + masks (Annotations). The `'manual_training_n<_>_seed<_>'` folder contains the exact content of the train split except that it does not contain the mask.
 
 Source data for training the model and exercise are findable in Zenodo [here](https://zenodo.org/records/10277106).
 
