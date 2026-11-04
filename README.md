@@ -24,8 +24,7 @@ Finally, we will asses the performance quality of our model using standard bench
 To prepare your setup to run this project please follow these steps:
 
 - Create a new folder on your home directory for this project.
-- Copy the `2026_deep_learning_with_VIBE.zip` file located on the location: `/storage/research/dsl_vibe_rs/trainings/2026_deep_learning_with_VIBE` and unzip the file. Hint: right click and try to decompress it with PeaZip.
-- From now on you will work in your own copy of this project. 
+- Copy the `2026_deep_learning_with_VIBE.zip` file located on the location: `/storage/research/dsl_vibe_rs/trainings/2026_deep_learning_with_VIBE` and unzip the file. Hint: right click and try to decompress it with PeaZip. From now on you will work in your own copy of this project. 
 - Explore the `../data_cp/` folder, it contains the following 5 folders 
     - `A172`
     - `A172_splits_n50_seed42`
@@ -41,22 +40,20 @@ The folder `A172` is the original dataset which we will not use. There are over 
     ├── train
     └── validation
 ```
-Inside the folder you will find the data split as 80% for the train 10% for test + 10% for validation for the respective size. Each of them contain a pair of images + masks (Annotations). The `'manual_training_n<_>_seed<_>'` folder contains the exact content of the train split except that it does not contain the mask.
+Inside, you will find the data split as 80% for the train 10% for test + 10% for validation for the respective size. Each of them contain a pair of images + masks (Annotations). The `'manual_training_n**_seed**'` folder contains the exact content of the train split except that it does not contain the mask.
 
 Source data for training the model and exercise are findable in Zenodo [here](https://zenodo.org/records/10277106).
 
 ### (Optional) Data preparation via scripts
 We can download and organize the dataset programmatically for easy handling with the GUI.
 
+!!! note 
+To run the section to pull the data from zenodo, you will to install the package `zenodo_get` in your environment or manually the folder from Zenodo (see link above). 
+
 Steps: 
-- Create a new folder on your home directory for this project.
-- Clone the project repository into teh folder you created using:
-```bash
-git clone https://github.com/dsl-unibe-ch/2026_deep_learning_with_VIBE.git
-```
 - Launch jupyterlab: `Applications -> VIBE -> VIBE Applications -> jupyterlab -> jupyterlab (cellpose-gui-4.2.1.1)[VIBE]`
 - navigate to the folder you saved the the project and open the 
-file `01_data_preparation.ipynb` and execute the full script. This will pull the data from zenodo, extract it and splitting the data and reorganize the files. If the scripts run correctly you will be able to see  a zip file an 3 folders each with its content as explained above.
+jupyter notebook `01_data_preparation.ipynb` and follow the instructions to execute the full script. This will check it the data directories exist, if not, it will be pulled from zenodo, extract it and splitting the data and reorganize the files. If the scripts run correctly you will be able to see the folders with the same content as explained above.
 
 
 
