@@ -63,3 +63,5 @@ In our example the folder called "high" contain images of cellular nuclei staini
 - Click the "Train" button to start the training. For 100 Epoch under these settings it may take about 5 min using the RTX 6000 graphic card.
 
 - Monitor the evolution of the training in the "Training Progress" panel and observe the loss curves for the training and validation sets.
+
+- Save your model under the "Export" section: select the checkpoint option and click the "Export Model" button. Provide a destination and name for your newly created model.
