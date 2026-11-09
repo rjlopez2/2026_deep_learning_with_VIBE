@@ -55,7 +55,7 @@ In our example the folder called "high" contain images of cellular nuclei staini
 
 - From the training parameters tab select the following settings:
 	- enable 3d: no (default)
-	- Axes: YZ (default)
+	- Axes: YX (default)
 	- \# Epochs: 60
 	- batch size: 32
 	- patch xy: 32
