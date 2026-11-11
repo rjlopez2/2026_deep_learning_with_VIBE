@@ -67,3 +67,6 @@ data/
 
 # add any folder called "source"
 **/source
+
+# add .checkpoint files
+**/*.ckpt
