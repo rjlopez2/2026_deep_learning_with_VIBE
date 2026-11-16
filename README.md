@@ -12,9 +12,9 @@ The workshop is structured around two complementary exercises:
 
 - Cell segmentation with Cellpose: participants learn how to work with microscopy images containing cells or nuclei, compare predictions with ground truth annotations, refine labels interactively, and fine-tune a generalist segmentation model on a task-specific dataset. The exercise includes data preparation, model training, visualization of segmentation results, and quantitative performance assessment using standard segmentation metrics.
 
-- Image denoising and restoration with CAREamics: participants explore microscopy denoising using paired low-noise and high-quality images, train a denoising model, monitor the learning process through loss curves, and evaluate reconstruction quality using objective metrics. The exercise emphasizes the practical workflow of restoring noisy images while preserving biological structures.
+- Image denoising and restoration with CAREamics: participants explore microscopy denoising using paired low-noise and high-quality images, train a denoising model, monitor the learning process through loss curves, and evaluate reconstruction quality using objective metrics. The exercise emphasizes the practical workflow of restoring noisy images while preserving biological structures. Each exercise also includes three Jupyter notebooks in its scripts folder: one for preparing the data, one for training a model, and one for evaluating the model. Together, these notebooks provide a reproducible, code-based complement to the interactive workflows.
 
-Across both modules, participants learn how to:
+Across both exercise, participants learn how to:
 - organize microscopy datasets into training, validation, and test splits;
 - use VIBE applications and graphical tools for image inspection and annotation;
 - initialize and fine-tune pretrained deep learning models on small custom datasets;
