@@ -1,115 +1,26 @@
 # Material for the workshop "Deep learning tools using VIBE"
 
-# Aim
+## Deep learning tools using VIBE
 
-The aim of this exercise is to become familiar with Cellpose, a generalist algorithm for cellular segmentation from microscopy images. 
-You will:
+This workshop provides a hands-on introduction to modern deep learning workflows for microscopy image analysis in the VIBE environment. VIBE (Virtual Imaging at University of Bern) is a virtual platform for advanced and interactive image analysis designed for researchers at the University of Bern. It is powered by the university’s high-performance computing infrastructure and delivered through an Open OnDemand-based desktop environment, making it well suited for computationally intensive image analysis tasks and reproducible scientific workflows.
 
-1. Explore the Cellpose GUI and its main features such as create, modify and remove annotations.
-2. Segment images using the default models.
-3. Visually evaluate the quality of the resulting segmentation.
-4. Retrain a model using a toy dataset.
-5. Systematically assess segmentation quality using standard metrics available through the Cellpose API.
+The course is designed for researchers, students, and practitioners working with biological and biomedical imaging data who want to apply deep learning tools to real microscopy problems without having to build the full analysis pipeline from scratch. Throughout the workshop, participants will use VIBE as the working environment for image inspection, data preparation, model training, evaluation, and downstream analysis.
 
+The workshop combines interactive graphical tools with reproducible Python notebooks to cover the full lifecycle of a deep learning project: data preparation, model selection, training, validation, visualization, and quantitative evaluation. The goal is to teach participants how to use state-of-the-art tools to solve common microscopy analysis tasks in a practical and application-oriented way.
 
-# The tasks
+The workshop is structured around two complementary exercises:
 
-We will try to use cellpose to segment microscopy images from live cells. We will first inspect the quality of the segmentation using specialized deep learning models and compare the segmentation with the correct annotation (ground truth). First we will try to iteratively fine tune a generalist model with our dataset using the GUI. Then we will try to do a more advanced exercise and train our model with more control programmatically.
+- Cell segmentation with Cellpose: participants learn how to work with microscopy images containing cells or nuclei, compare predictions with ground truth annotations, refine labels interactively, and fine-tune a generalist segmentation model on a task-specific dataset. The exercise includes data preparation, model training, visualization of segmentation results, and quantitative performance assessment using standard segmentation metrics.
 
-Finally, we will asses the performance quality of our model using standard benchmark and metrics.
+- Image denoising and restoration with CAREamics: participants explore microscopy denoising using paired low-noise and high-quality images, train a denoising model, monitor the learning process through loss curves, and evaluate reconstruction quality using objective metrics. The exercise emphasizes the practical workflow of restoring noisy images while preserving biological structures.
 
+Across both modules, participants learn how to:
+- organize microscopy datasets into training, validation, and test splits;
+- use VIBE applications and graphical tools for image inspection and annotation;
+- initialize and fine-tune pretrained deep learning models on small custom datasets;
+- monitor and interpret model training behavior;
+- compare baseline and adapted models;
+- assess performance using both visual inspection and quantitative metrics;
+- export trained models and integrate them into downstream analysis workflows.
 
-## 1. Data preparation
-
-To prepare your setup to run this project please follow these steps:
-
-- Create a new folder on your home directory for this project.
-- Copy the `2026_deep_learning_with_VIBE.zip` file located on the location: `/storage/research/dsl_vibe_rs/trainings/2026_deep_learning_with_VIBE` and unzip the file. Hint: right click and try to decompress it with PeaZip. From now on you will work in your own copy of this project. 
-- Explore the `../data_cp/` folder, it contains the following 5 folders 
-    - `A172`
-    - `A172_splits_n50_seed42`
-    - `A172_splits_n100_seed42`
-    - `A172_splits_n200_seed42`
-    - `A172_splits_n500_seed42`
-The folder `A172` is the original dataset which we will not use. There are over ~600 images from train and test sets altogether. The other folders contain subsets of the original dataset of varying sizes: n= 50, 100, 200, 500 as indicated on their names. Inside any of this subsets you will find the following folder structure:
-
-```bash
-└── A172_splits_n50_seed42
-    ├── manual_training_n50_seed42
-    ├── test
-    ├── train
-    └── validation
-```
-Inside, you will find the data split as 80% for the train 10% for test + 10% for validation for the respective size. Each of them contain a pair of images + masks (Annotations). The `'manual_training_n**_seed**'` folder contains the exact content of the train split except that it does not contain the mask.
-
-Source data for training the model and exercise are findable in Zenodo [here](https://zenodo.org/records/10277106).
-
-### (Optional) Data preparation via scripts
-We can download and organize the dataset programmatically for easy handling with the GUI.
-
-!!! note 
-
-To run the section to pull the data from zenodo, you will to install the package `zenodo_get` in your environment or manually the folder from Zenodo (see link above). 
-
-Steps: 
-- Launch jupyterlab: `Applications -> VIBE -> VIBE Applications -> jupyterlab -> jupyterlab (cellpose-gui-4.2.1.1)[VIBE]`
-- navigate to the folder you saved the the project and open the 
-jupyter notebook `01_data_preparation.ipynb` and follow the instructions to execute the full script. This will check it the data directories exist, if not, it will be pulled from zenodo, extract it and splitting the data and reorganize the files. If the scripts run correctly you will be able to see the folders with the same content as explained above.
-
-
-## 2. Manually fine-tuning your model with human in the loop
-
-1. Launch the cellpose application by navigating to: `Applications -> VIBE -> VIBE Applications -> cellpose -> cellpose (cellpose-gui-4.2.1.1) [VIBE]`
-
-2. Open any sample image from the folder `../data/A172_manual_training/` that was decompressed in the previous step. Drag and drop option is possible.
-
-3. On the Segmentation panel, select any of the default model but the `cpsam_v2`. Use for instance the `cpdino` model. Hit "run" to segment the cells of your image.
-
-4. On the Drawing panel, toggle the MASK ON to visually asses the segmentation quality. Add, delete or edit ROIs that were missed or wrongly predicted. Save the mask with `Ctrl + s` when you are happy. Use the help assistance or go to the [official documentation](https://cellpose.readthedocs.io/en/latest/gui.html) to find additional information about how to use the cellpose GUI. 
-
-5. Repeat this process with few images (at least 5): load image -> predict with your model -> modify the mask if need it -> save your mask
-
-6. Train your own model with your new annotations: from the top menu select: `Models -> Train new model with image + mask in folder`. You can adjust here your train settings. Note that at the right site will be displayed teh mask that you have created. For the model parameters you can reduce the n_epochs, give a memorable name to your model and let the other values as they are. click OK to start your training. Monitor the training process on the command line.
-
-7. Use your model to predict/segment your images: load one of your images and under the Segmentation panel use the "user-trained models" to select your newly trained model. Hit run to use it for segmenting your images. Do you see any improvement?
-
-
-## 3. Fine-tuning your model programmatically (Optional)
-
-- Open the notebook `02_train_model.ipynb` under the `scripts` folder.
-- Follow the instructions from the notebook and execute the cells for training a new model.
-
-## 4. Asses the quality of the model from benchmark metrics
-
-- Open the notebook `03_asses_model.ipynb` under the `scripts` folder.
-- Follow the instructions from the notebook and execute the cells to obtain and evaluate the metrics of your model.
-
-## 5. Model interoperability with other Applications (QuPath)
-
-In this small exercise we will try to use our recently fine-tunned model to segment our cell inside a different application: QuPath.
-
-- Next to the script folder create a folder called `qupath_project`.
-
-- Launch the `QuPath-extensions` application from the `VIBE-applications` menu.
-
-- create a project and point to the folder you have just created before.
-
-- drag and drop any image that you want to test the segmentation. Use for instance images from the folder `manual_training_n50_seed42`
-
-- create a region of interest ROI on the image. **Important step**: if not done, the model will not run on the image and complains with message: "Please select a parent object!"
-
-- when prompted for what type of image this is, select "others"
-
-- Go to `Extension -> Cellpose -> Cellpose detection script template`
-
-- Change line 23 of the template script where the model path is defined and replace it where your model is located, for example with something like that:
-
-```groovy
-def pathModel = "~/Desktop/test_course_vive/2026_deep_learning_with_VIBE/cellpose/models/A172_splits_n500_seed42_cyto-finetuned_n_epochs11_b_size64_w_decay0.1_l_rate1e-05"
-```
-- change the line 25 of the script where the channels are defined to the value: `0`
-
-- hit the "Run" button to start the segmentation.
-
-- Inspect the results of the segmentation.
-
+By the end of the course, participants will have practical experience with modern deep learning tools for microscopy image analysis and a clear understanding of the end-to-end workflow required to train, validate, and evaluate models in a real biological imaging context. They will also be familiar with VIBE as a collaborative and scalable platform for interactive image analysis and advanced scientific workflows.
