@@ -1,6 +1,6 @@
 # Material for the workshop "Deep learning tools using VIBE"
 
-# Aim
+## Aim
 
 The aim of this exercise is to become familiar with Cellpose, a generalist algorithm for cellular segmentation from microscopy images. 
 You will:
@@ -12,14 +12,14 @@ You will:
 5. Systematically assess segmentation quality using standard metrics available through the Cellpose API.
 
 
-# The tasks
+## The tasks
 
 We will try to use cellpose to segment microscopy images from live cells. We will first inspect the quality of the segmentation using specialized deep learning models and compare the segmentation with the correct annotation (ground truth). First we will try to iteratively fine tune a generalist model with our dataset using the GUI. Then we will try to do a more advanced exercise and train our model with more control programmatically.
 
 Finally, we will asses the performance quality of our model using standard benchmark and metrics.
 
 
-## 1. Data preparation
+### 1. Data preparation
 
 To prepare your setup to run this project please follow these steps:
 
@@ -31,6 +31,7 @@ To prepare your setup to run this project please follow these steps:
     - `A172_splits_n100_seed42`
     - `A172_splits_n200_seed42`
     - `A172_splits_n500_seed42`
+
 The folder `A172` is the original dataset which we will not use. There are over ~600 images from train and test sets altogether. The other folders contain subsets of the original dataset of varying sizes: n= 50, 100, 200, 500 as indicated on their names. Inside any of this subsets you will find the following folder structure:
 
 ```bash
@@ -44,22 +45,23 @@ Inside, you will find the data split as 80% for the train 10% for test + 10% for
 
 Source data for training the model and exercise are findable in Zenodo [here](https://zenodo.org/records/10277106).
 
-### (Optional) Data preparation via scripts
+#### 1.1 (Optional) Data preparation via scripts
 We can download and organize the dataset programmatically for easy handling with the GUI.
 
 !!! note 
 
-To run the section to pull the data from zenodo, you will to install the package `zenodo_get` in your environment or manually the folder from Zenodo (see link above). 
+    To run the section to pull the data from zenodo, you will to install the package `zenodo_get` in your environment or manually the folder from Zenodo (see link above). 
 
 Steps: 
-- Launch jupyterlab: `Applications -> VIBE -> VIBE Applications -> jupyterlab -> jupyterlab (cellpose-gui-4.2.1.1)[VIBE]`
+
+- Launch jupyterlab: `Applications -> VIBE -> VIBE Applications -> jupyterlab -> jupyterlab (cellpose-gui-3.1.1.3)[VIBE]`
 - navigate to the folder you saved the the project and open the 
 jupyter notebook `01_data_preparation.ipynb` and follow the instructions to execute the full script. This will check it the data directories exist, if not, it will be pulled from zenodo, extract it and splitting the data and reorganize the files. If the scripts run correctly you will be able to see the folders with the same content as explained above.
 
 
-## 2. Manually fine-tuning your model with human in the loop
+### 2. Manually fine-tuning your model with human in the loop
 
-1. Launch the cellpose application by navigating to: `Applications -> VIBE -> VIBE Applications -> cellpose -> cellpose (cellpose-gui-4.2.1.1) [VIBE]`
+1. Launch the cellpose application by navigating to: `Applications -> VIBE -> VIBE Applications -> cellpose -> cellpose (cellpose-gui-3.1.1.3) [VIBE]`
 
 2. Open any sample image from the folder `../data/A172_manual_training/` that was decompressed in the previous step. Drag and drop option is possible.
 
@@ -74,17 +76,19 @@ jupyter notebook `01_data_preparation.ipynb` and follow the instructions to exec
 7. Use your model to predict/segment your images: load one of your images and under the Segmentation panel use the "user-trained models" to select your newly trained model. Hit run to use it for segmenting your images. Do you see any improvement?
 
 
-## 3. Fine-tuning your model programmatically (Optional)
+### 3. Fine-tuning your model programmatically (Optional)
 
+- Launch jupyterlab: `Applications -> VIBE -> VIBE Applications -> jupyterlab -> jupyterlab (cellpose-gui-3.1.1.3)[VIBE]`
 - Open the notebook `02_train_model.ipynb` under the `scripts` folder.
 - Follow the instructions from the notebook and execute the cells for training a new model.
 
-## 4. Asses the quality of the model from benchmark metrics
+### 4. Asses the quality of the model from benchmark metrics
 
+- Launch jupyterlab: `Applications -> VIBE -> VIBE Applications -> jupyterlab -> jupyterlab (cellpose-gui-3.1.1.3)[VIBE]`
 - Open the notebook `03_asses_model.ipynb` under the `scripts` folder.
 - Follow the instructions from the notebook and execute the cells to obtain and evaluate the metrics of your model.
 
-## 5. Model interoperability with other Applications (QuPath)
+### 5. Model interoperability with other Applications (QuPath)
 
 In this small exercise we will try to use our recently fine-tunned model to segment our cell inside a different application: QuPath.
 
